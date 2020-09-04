@@ -372,7 +372,9 @@ def tg_util_sync_get_user_name(msg, chat_action='from'):
     if _first_name or _last_name:
         fullname = "{} {}".format(_first_name, _last_name).strip()
 
-    if "prefer_fullname" in telesync_config and telesync_config["prefer_fullname"] and fullname:
+    if "nicknames" in telesync_config and telegram_uid in telesync_config["nicknames"]:
+        username = telesync_config["nicknames"][telegram_uid]
+    elif "prefer_fullname" in telesync_config and telesync_config["prefer_fullname"] and fullname:
         username = fullname
     elif 'username' in msg[chat_action]:
         username = msg[chat_action]['username']
